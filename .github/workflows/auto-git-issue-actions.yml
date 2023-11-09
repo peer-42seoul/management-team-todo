@@ -1,0 +1,89 @@
+name: auto-git-issue-actions
+
+run-name: ${{ github.actor }} is issueing for ToDoList GitHub Actions
+
+on:
+#   workflow_dispatch:
+  schedule: 
+   - cron: "30 10 * * *"
+   - cron: "0 20 * * *"
+
+jobs:
+  open-issue:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v4
+    
+      - name: Check Current Time
+        id: check-time
+        run: |
+          date
+          echo "::set-output name=hour::$(date -d '+9 hours' +'%H')"
+      
+      - name: Create Issue 
+        if: ${{ steps.check-time.outputs.hour == '19' }}
+        id: create_issue
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.TOKEN}}
+          script: |
+            const currentDate = new Date().toISOString().split('T')[0];
+            const issueTitle = `${currentDate}-TODO`;
+            const issueBody1 = `# 투두리스트 작성하는 법\n`;
+            const issueBody2 = `### (1) 아래 코멘트로 오늘 할 일 적기.\n`;
+            const issueBody3 = `### (2) 저녁 8시 전까지 무슨 일을 하셨는지 체킹하기.\n`;
+            const issueBody4 = `### 참고사항 본인의 작업 코드에 해당하는 이슈 링크 첨부 권장 (그 사람이 전체적인 작업 현황을 쉽게 볼 수 있으면 좋겠다는 의견)`;
+            const issueBody = issueBody1 + issueBody2 + issueBody3 + issueBody4;
+
+            const owner = "peer-42seoul";
+            const repo = "test";
+            const newIssue = await github.rest.issues.create({
+              owner,
+              repo,
+              title: issueTitle,
+              body: issueBody
+            });
+
+      - name: Close Issue
+        if: ${{ steps.check-time.outputs.hour == '20' }}
+        id: close_issue
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.TOKEN}}
+          script: |
+            const currentDate = new Date().toISOString().split('T')[0];
+            const issueTitle = `${currentDate}-TODO`;
+            const owner = "peer-42seoul";
+            const repo = "test";
+            const response = await github.rest.issues.listForRepo({
+              owner,
+              repo,
+              state: 'open'
+            });
+            console.log(response.data.length);
+            const listData = response.data;
+            for (var i = 0; i < listData.length; i++) {
+              if(listData[i].title === issueTitle)
+              {
+                await github.rest.issues.update({
+                  owner,
+                  repo,
+                  issue_number: listData[i].number,
+                  state: 'close'
+                })   
+              }
+            };
+
+
+
+# 깃헙 액션 로직 
+# 1. 8시 30분 
+# 2. 깃 액션으로 이슈 활성화
+# 3. 깃 핀드 진행하기
+# 4. 내용 집어넣기
+# 5. 이메일 알람 보내기 
+
+# 1. 저녁 8시이면
+# 2. 깃 액션으로 이슈 잠금 
+# 3. 깃 핀 해제
