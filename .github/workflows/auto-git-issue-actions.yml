@@ -33,7 +33,7 @@ jobs:
             console.log("현재 시각 + 9 : " + kTime);            
 
       - name: Create Issue 
-        if: ${{ steps.check-time.outputs.hour == '12' }}
+        if: ${{ steps.check-time.outputs.hour == '10' }}
         id: create_issue
         uses: actions/github-script@v6
         with:
