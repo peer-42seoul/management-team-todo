@@ -19,7 +19,7 @@ jobs:
         id: check-time
         run: |
           date
-          echo "::set-output name=hour::$(date -d '+9 hours'+'%H')"
+          echo "::set-output name=hour::$(date -d '+9 hours' + '%H')"
 
       - name: Time Testing
         id: time_testing
