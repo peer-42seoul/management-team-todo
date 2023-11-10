@@ -45,7 +45,7 @@ jobs:
             }
 
       - name: Create Issue 
-        if: ${{ steps.check-time.outputs.hour == '10' }}
+        if: ${{ steps.check-time.outputs.hour == '20' }}
         id: create_issue
         uses: actions/github-script@v6
         with:
@@ -112,7 +112,6 @@ jobs:
               repo,
               state: 'open'
             });
-            console.log(response.data.length);
             const listData = response.data;
             for (var i = 0; i < listData.length; i++) {
               if(listData[i].title === issueTitle)
