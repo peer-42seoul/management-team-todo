@@ -22,7 +22,7 @@ jobs:
           echo "::set-output name=hour::$(date -d '+9 hours' +'%H')"
       
       - name: Create Issue 
-        if: ${{ steps.check-time.outputs.hour == '19' }}
+        if: ${{ steps.check-time.outputs.hour == '10' }}
         id: create_issue
         uses: actions/github-script@v6
         with:
