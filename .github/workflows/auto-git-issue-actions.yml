@@ -23,7 +23,7 @@ jobs:
 
       - name: Time Testing
         id: time_testing
-        uses: action/github-script@v6
+        uses: actions/github-script@v6
         with:
           github-token: ${{secrets.TOKEN}}
           script: |
