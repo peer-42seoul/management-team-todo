@@ -29,7 +29,8 @@ jobs:
           script: |
             const currentDate = new Date();
             console.log("현재 시각 : " + currentDate.getHours());
-            console.log("현재 시각 + 9 : " + currentDate.getHours() + 9);            
+            const kTime = currentDate.getHours() + 9
+            console.log("현재 시각 + 9 : " + kTime);            
 
       - name: Create Issue 
         if: ${{ steps.check-time.outputs.hour == '10' }}
