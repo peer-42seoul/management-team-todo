@@ -27,10 +27,9 @@ jobs:
         with:
           github-token: ${{secrets.TOKEN}}
           script: |
-            console.log("현재 시각 : " + steps.check-time.outputs.hour );
-          
-        
-      
+            const currentDate = new Date().toISOString().split('T')[0];
+            console.log("현재 시각 : " + currentDate);
+
       - name: Create Issue 
         if: ${{ steps.check-time.outputs.hour == '10' }}
         id: create_issue
