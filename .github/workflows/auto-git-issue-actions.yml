@@ -47,7 +47,7 @@ jobs:
             const issueBody = issueBody1 + issueBody2 + issueBody3 + issueBody4;
 
             const owner = "peer-42seoul";
-            const repo = "test";
+            const repo = "mangement-team-todo";
             const newIssue = await github.rest.issues.create({
               owner,
               repo,
@@ -65,7 +65,7 @@ jobs:
             const currentDate = new Date().toISOString().split('T')[0];
             const issueTitle = `${currentDate}-TODO`;
             const owner = "peer-42seoul";
-            const repo = "test";
+            const repo = "mangement-team-todo";
             const response = await github.rest.issues.listForRepo({
               owner,
               repo,
