@@ -3,10 +3,10 @@ name: auto-git-issue-actions
 run-name: ${{ github.actor }} is issueing for ToDoList GitHub Actions
 
 on:
-#  workflow_dispatch:
-  schedule: 
-   - cron: "30 1 * * *"
-   - cron: "00 11 * * *"
+  workflow_dispatch:
+#  schedule: 
+#   - cron: "30 1 * * *"
+#   - cron: "00 11 * * *"
 
 jobs:
   open-issue:
@@ -30,7 +30,19 @@ jobs:
             const currentDate = new Date();
             console.log("현재 시각 : " + currentDate.getHours());
             const kTime = currentDate.getHours() + 9
-            console.log("현재 시각 + 9 : " + kTime);            
+            console.log("현재 시각 + 9 : " + kTime);  
+            const korOffset = 9 * 60;
+            const currentKOR = new Date(currentUTC.getTime() + korOffset * 60000);
+            const dayOfWeek = currentKOR.getDay();
+            if (dayOfWeek === 0) {
+              console.log("일요일입니다. 종료 합니다.");
+            }
+            else if (dayOfWeek === 6) {
+              console.log("토요일입니다. 종료 합니다.");
+            }
+            else {
+              console.log("현재는 평일입니다!");
+            }
 
       - name: Create Issue 
         if: ${{ steps.check-time.outputs.hour == '10' }}
