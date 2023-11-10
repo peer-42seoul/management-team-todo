@@ -3,10 +3,10 @@ name: auto-git-issue-actions
 run-name: ${{ github.actor }} is issueing for ToDoList GitHub Actions
 
 on:
-#   workflow_dispatch:
-  schedule: 
-   - cron: "30 1 * * *"
-   - cron: "00 11 * * *"
+   workflow_dispatch:
+#  schedule: 
+ #  - cron: "30 1 * * *"
+  # - cron: "00 11 * * *"
 
 jobs:
   open-issue:
@@ -19,7 +19,17 @@ jobs:
         id: check-time
         run: |
           date
-          echo "::set-output name=hour::$(date +'%H')"
+          echo "::set-output name=hour::$(date -d '+9 hours'+'%H')"
+
+      - name: Time Testing
+        id: time_testing
+        uses: action/github-script@v6
+        with:
+          github-token: ${{secrets.TOKEN}}
+          script: |
+            console.log("현재 시각 : " + ${{ steps.check_time.outputs.hour }});
+          
+        
       
       - name: Create Issue 
         if: ${{ steps.check-time.outputs.hour == '10' }}
