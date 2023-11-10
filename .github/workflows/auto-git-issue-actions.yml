@@ -27,7 +27,7 @@ jobs:
         with:
           github-token: ${{secrets.TOKEN}}
           script: |
-            console.log("현재 시각 : " + ${{ steps.check_time.outputs.hour }});
+            console.log("현재 시각 : " + ${{ steps.check-time.outputs.hour }});
           
         
       
