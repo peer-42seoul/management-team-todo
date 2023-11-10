@@ -3,10 +3,10 @@ name: auto-git-issue-actions
 run-name: ${{ github.actor }} is issueing for ToDoList GitHub Actions
 
 on:
-  workflow_dispatch:
-#  schedule: 
-#   - cron: "30 1 * * *"
-#   - cron: "00 11 * * *"
+#  workflow_dispatch:
+  schedule: 
+   - cron: "30 1 * * *"
+   - cron: "00 11 * * *"
 
 jobs:
   open-issue:
@@ -45,7 +45,7 @@ jobs:
             }
 
       - name: Create Issue 
-        if: ${{ steps.check-time.outputs.hour == '20' }}
+        if: ${{ steps.check-time.outputs.hour == '10' }}
         id: create_issue
         uses: actions/github-script@v6
         with:
