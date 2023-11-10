@@ -66,7 +66,6 @@ jobs:
             else {
               console.log("현재는 평일입니다!" + '\n' + "ToDo List issue 를 발행합니다.");
             }
-            const currentDate = new Date().toISOString().split('T')[0];
             const issueTitle = `${currentDate}-TODO`;
             const issueBody1 = `# 투두리스트 작성하는 법\n`;
             const issueBody2 = `### (1) 아래 코멘트로 오늘 할 일 적기.\n`;
@@ -105,7 +104,6 @@ jobs:
             else {
               console.log("현재는 평일입니다!" + '\n' + "ToDo List issue 를 탐색 및 종료합니다.");
             }
-            const currentDate = new Date().toISOString().split('T')[0];
             const issueTitle = `${currentDate}-TODO`;
             const owner = "peer-42seoul";
             const repo = "mangement-team-todo";
