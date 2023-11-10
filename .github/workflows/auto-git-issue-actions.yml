@@ -32,7 +32,7 @@ jobs:
             const kTime = currentDate.getHours() + 9
             console.log("현재 시각 + 9 : " + kTime);  
             const korOffset = 9 * 60;
-            const currentKOR = new Date(currentUTC.getTime() + korOffset * 60000);
+            const currentKOR = new Date(currentDate.getTime() + korOffset * 60000);
             const dayOfWeek = currentKOR.getDay();
             if (dayOfWeek === 0) {
               console.log("일요일입니다. 종료 합니다.");
