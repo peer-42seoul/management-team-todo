@@ -4,9 +4,9 @@ run-name: ${{ github.actor }} is issueing for ToDoList GitHub Actions
 
 on:
   workflow_dispatch:
-#  schedule: 
-#   - cron: "00 23 * * *"
-#   - cron: "00 11 * * *"
+  schedule: 
+   - cron: "00 23 * * *"
+   - cron: "00 11 * * *"
 
 jobs:
   open-issue:
@@ -45,7 +45,7 @@ jobs:
             }
 
       - name: Create Issue 
-#        if: ${{ steps.check-time.outputs.hour == '10' }}
+        if: ${{ steps.check-time.outputs.hour == '32' }}
         id: create_issue
         uses: actions/github-script@v6
         with:
