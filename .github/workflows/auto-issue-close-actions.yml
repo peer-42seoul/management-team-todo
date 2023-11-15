@@ -1,4 +1,4 @@
-name: auto-git-issue-actions
+name: auto-issue-close-actions
 
 run-name: ${{ github.actor }} is issueing for ToDoList GitHub Actions
 
