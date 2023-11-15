@@ -6,7 +6,6 @@ on:
   workflow_dispatch:
   schedule: 
    - cron: "00 23 * * *"
-   - cron: "00 11 * * *"
 
 jobs:
   open-issue:
@@ -45,7 +44,6 @@ jobs:
             }
 
       - name: Create Issue 
-        # if: ${{ steps.check-time.outputs.hour == '32' }}
         id: create_issue
         uses: actions/github-script@v6
         with:
@@ -142,51 +140,6 @@ jobs:
               title: issueTitle,
               body: issueBody
             });
-
-      - name: Close Issue
-        if: ${{ steps.check-time.outputs.hour == '20' }}
-        id: close_issue
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{secrets.TOKEN}}
-          script: |
-            const currentDate = new Date();
-            const korOffset = 9 * 60;
-            const currentKOR = new Date(currentDate.getTime() + korOffset * 60000);
-            const dayOfWeek = currentKOR.getDay();
-            if (dayOfWeek === 0) {
-              console.log("일요일입니다. 종료 합니다.");
-              return;
-            }
-            else if (dayOfWeek === 6) {
-              console.log("토요일입니다. 종료 합니다.");
-              return ;
-            }
-            else {
-              console.log("현재는 평일입니다!" + '\n' + "ToDo List issue 를 탐색 및 종료합니다.");
-            }
-            const date = currentDate.toISOString().split('T')[0];
-            const issueTitle = `${date}-TODO`;
-            const owner = "peer-42seoul";
-            const repo = "mangement-team-todo";
-            const response = await github.rest.issues.listForRepo({
-              owner,
-              repo,
-              state: 'open'
-            });
-            const listData = response.data;
-            for (var i = 0; i < listData.length; i++) {
-              if(listData[i].title === issueTitle)
-              {
-                await github.rest.issues.update({
-                  owner,
-                  repo,
-                  issue_number: listData[i].number,
-                  state: 'close'
-                })   
-              }
-            };
-
 
 
 # 깃헙 액션 로직 
