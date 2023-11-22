@@ -64,6 +64,7 @@ jobs:
             else {
               console.log("현재는 평일입니다!" + '\n' + "ToDo List issue 를 탐색 및 종료합니다.");
             }
+            currnetDate.setHourse(currentDate.getHours() + 9);
             const date = currentDate.toISOString().split('T')[0];
             const issueTitle = `${date}-TODO`;
             const owner = "peer-42seoul";
