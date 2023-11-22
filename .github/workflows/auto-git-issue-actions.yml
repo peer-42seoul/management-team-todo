@@ -64,6 +64,7 @@ jobs:
             else {
               console.log("현재는 평일입니다!" + '\n' + "ToDo List issue 를 발행합니다.");
             }
+            currentDate.setHours(currentDate.getHours() + 9);
             const date = currentDate.toISOString().split('T')[0];
             const issueTitle = `${date}-TODO`;
             const issueBody1 = `# 투두리스트 작성하는 법\n`;
@@ -130,7 +131,7 @@ jobs:
                 #### wochae
                 - 알람 (스프링)
                 - 인공지능 입출력 (chatGPT)`;
-            const issueBody = issueBody1 + issueBody2 + issueBody3 + issueBody4;
+            const issueBody = issueBody1 + issueBody2 + issueBody3 + issueBody4 + issueBody5;
 
             const owner = "peer-42seoul";
             const repo = "mangement-team-todo";
