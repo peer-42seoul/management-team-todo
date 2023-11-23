@@ -136,25 +136,14 @@ jobs:
             #### wochae
             - 알람 (스프링)
             - 인공지능 입출력 (chatGPT)`;
+
             const issueBody = issueBody1 + issueBody2 + issueBody3 + issueBody4 + issueBody5;
 
             const owner = "peer-42seoul";
-            const repo = "mangement-team-todo";
+            const repo = "management-team-todo";
             const newIssue = await github.rest.issues.create({
               owner,
               repo,
               title: issueTitle,
               body: issueBody
             });
-
-
-# 깃헙 액션 로직 
-# 1. 8시 30분 
-# 2. 깃 액션으로 이슈 활성화
-# 3. 깃 핀드 진행하기
-# 4. 내용 집어넣기
-# 5. 이메일 알람 보내기 
-
-# 1. 저녁 8시이면
-# 2. 깃 액션으로 이슈 잠금 
-# 3. 깃 핀 해제
