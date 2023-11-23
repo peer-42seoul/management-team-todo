@@ -61,9 +61,9 @@ jobs:
               console.log("토요일입니다. 종료 합니다.");
               return ;
             }
-            else {
+            else 
               console.log("현재는 평일입니다!" + '\n' + "ToDo List issue 를 발행합니다.");
-            }
+            const currentDate = new Date();
             currentDate.setHours(currentDate.getHours() + 9);
             const date = currentDate.toISOString().split('T')[0];
             const issueTitle = `${date}-TODO`;
