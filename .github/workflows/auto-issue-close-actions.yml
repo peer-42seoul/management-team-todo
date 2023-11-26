@@ -5,7 +5,7 @@ run-name: ${{ github.actor }} is issueing for ToDoList GitHub Actions
 on:
   workflow_dispatch:
   schedule: 
-   - cron: "00 11 * * *"
+   - cron: "00 13 * * *"
 
 jobs:
   open-issue:
